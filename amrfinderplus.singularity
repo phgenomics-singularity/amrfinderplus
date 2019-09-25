@@ -38,7 +38,3 @@ export PATH=/opt/conda/bin:$PATH
   
   amrfinder -u
   echo "Done"
-
-%test
-	amrfinder --plus -n test_dna.fa -O Campylobacter > test_dna.got
-	diff test_dna.expected test_dna.got
