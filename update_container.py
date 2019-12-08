@@ -22,6 +22,7 @@ def load_template(name):
 @click.option("--db_version", is_flag=True)
 @click.option("--author", default=None)
 @click.option("-c", "--config", default="config.toml")
+
 def update_amrfinderplus_singularity(amrfinderplus_version, db_version, author, config):
     '''
     Use the config.toml, or override any of the options via the command line

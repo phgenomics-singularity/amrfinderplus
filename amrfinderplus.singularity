@@ -13,6 +13,8 @@ db {{db_version}}
 %environment
 export PATH=/opt/conda/bin:$PATH
 %post
+# setup the container with appropriate packages - fix issue #17
+  apt-get --yes update && apt-get --yes upgrade && apt-get install --yes file && apt-get clean
  # set versions of software to install
   export PATH=/opt/conda/bin:$PATH 
   conda --version
@@ -25,16 +27,7 @@ export PATH=/opt/conda/bin:$PATH
 
   conda install -y -c bioconda ncbi-amrfinderplus
   conda update -c bioconda -y ncbi-amrfinderplus
-  
+  amrfinder -u 
 
-# get test files
-  curl -O https://raw.githubusercontent.com/ncbi/amr/v3b/test_dna.fa \
-  -O https://raw.githubusercontent.com/ncbi/amr/v3b/test_prot.fa \
-  -O https://raw.githubusercontent.com/ncbi/amr/v3b/test_prot.gff \
-  -O https://raw.githubusercontent.com/ncbi/amr/v3b/test_both.expected \
-  -O https://raw.githubusercontent.com/ncbi/amr/v3b/test_dna.expected \
-  -O https://raw.githubusercontent.com/ncbi/amr/v3b/test_prot.expected 
- 
   
-  amrfinder -u
   echo "Done"
